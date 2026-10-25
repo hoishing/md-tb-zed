@@ -35,17 +35,25 @@
 需求：Zed 1.25.3 或更新版本，以及透過 rustup 安裝的 Rust。
 
 ```sh
-# 如果 Rust 已安裝但目前 shell 找不到 cargo：
+# 載入目前 shell 的 Rust 路徑：
 . "$HOME/.cargo/env"
 
 rustup target add wasm32-wasip2
 ```
 
 1. 在 Zed 命令面板執行 `zed: install dev extension`。
-2. 選取此專案資料夾。
+2. 選取包含 `extension.toml` 的專案根目錄（`md-tb-zed`），不要選 `dist`。
 3. 等候編譯完成，開啟 `.md` 文件，將游標放入表格後按 `Cmd+.`。
 
-若 Zed 回報找不到 `rustc` 或 `cargo`，請確認 shell 的 `PATH` 包含 `$HOME/.cargo/bin`。新安裝 Rust 後，已開啟的 Zed 不一定會取得新路徑；可完整退出 Zed，再從已執行 `. "$HOME/.cargo/env"` 的終端啟動。
+若 Zed 回報 `running rustc: No such file or directory`，代表 Zed 的 `PATH` 找不到 Rust；即使終端能執行 `cargo`，仍可能發生。在 macOS 使用預設 zsh 時，請將以下內容加入 `~/.zprofile`，讓登入 shell 載入 Rust 路徑：
+
+```sh
+if [ -f "$HOME/.cargo/env" ]; then
+    . "$HOME/.cargo/env"
+fi
+```
+
+接著以 `Cmd+Q` 完整退出所有 Zed 視窗，再重新開啟並安裝。只關閉視窗或執行 Rebuild 不會更新既有 Zed 程序的環境。也可在完整退出後，從已執行 `. "$HOME/.cargo/env"` 的終端執行 `zed .`。
 
 `dist/server.cjs` 是已打包、內嵌於外掛的語言伺服器。安裝及使用外掛不需要執行 `npm install`；Node.js 由 Zed 管理。
 
