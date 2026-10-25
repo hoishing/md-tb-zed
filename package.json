@@ -1,0 +1,24 @@
+{
+  "name": "zed-markdown-table-tools",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:extension": "npm run build && cargo build --release --target wasm32-wasip2",
+    "check": "node --check server/index.mjs && node --check server/tables.mjs && node --check scripts/build.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "mdast-util-from-markdown": "^2.0.2",
+    "mdast-util-gfm-table": "^2.0.0",
+    "micromark-extension-gfm-table": "^2.1.1",
+    "vscode-languageserver": "^9.0.1",
+    "vscode-languageserver-textdocument": "^1.0.12"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}

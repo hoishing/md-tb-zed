@@ -1,0 +1,11 @@
+id = "markdown-table-tools"
+name = "Markdown Table Tools"
+version = "0.1.0"
+schema_version = 1
+authors = ["kng"]
+description = "Six context-aware Markdown table operations through Code Actions."
+
+[language_servers.markdown-table-tools]
+name = "Markdown Table Tools"
+languages = ["Markdown"]
+code_action_kinds = ["refactor.rewrite"]
